@@ -2,7 +2,6 @@ const tasks = [];
 const form = document.getElementById("form")
 const titleInput = document.getElementById("titleInput")
 const dateInput = document.getElementById("dateInput")
-const descriptionInput = document.getElementById("descriptionInput")
 const btn = document.getElementById("btn")
 const list = document.getElementById("taskLists")
 let formBackdrop = document.getElementById("formBackdrop")
@@ -28,14 +27,10 @@ btn.addEventListener("click", (e)=> {
 
     let date = dateInput.value.trim();
 
-    let description = descriptionInput.value.trim();
-        description = description.charAt(0).toUpperCase() + description.slice(1);
-
 
     let taskDetails = {  
         title: title,
         date: date,
-        description: description
     }
 
     let selectedDate = new Date(date);
@@ -72,7 +67,6 @@ btn.addEventListener("click", (e)=> {
 
         titleInput.value = "";
         dateInput.value = "";
-        descriptionInput.value = "";
 
     formBackdrop.classList.add("hidden")
 
@@ -89,20 +83,6 @@ function updateList() {
 
     let date = dateInput.value.trim();
 
-    let description = descriptionInput.value.trim()
-        description = description.charAt(0).toUpperCase() + description.slice(1);
-        // const charCount = document.getElementById("charCount");
-        // const maxChars = 100;
-        // descriptionInput.addEventListener("input", ()=> {
-        //     let val = descriptionInput.value;
-        //     if(val.length > maxChars) {
-        //         descriptionInput.value = val.slice(0, maxChars);
-        //         val = descriptionInput.value;
-        //     }
-        //     charCount.textContent = `${val.length} / ${maxChars}`;
-        // })
-
-    // tasks.sort((a, b) => new Date(a.task.date) - new Date(b.task.date));
 
     let taskItem = document.createElement('li')
     
@@ -111,9 +91,8 @@ function updateList() {
                 <div>
                     <input type="checkbox" class="checkbox peer accent-gray-900 cursor-pointer">
                     <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
-                        <p><span class="font-medium">Title:</span> ${title}</p>
-                        <p><span class="font-medium">Date:</span> ${date}</p>
-                        <p><span class="font-medium block">Description:</span> ${description}</p>
+                        <p><span class="font-medium">Task:</span> ${title}</p>
+                        <p><span class="font-medium">Due Date:</span> ${date}</p>
                     </label>
                 </div>
                 <div class="flex justify-between items-center gap-2"> 
@@ -155,7 +134,7 @@ function updateList() {
         taskLists.classList.add('hidden');
         titleInput.value = tasks[index].task.title
         dateInput.value = tasks[index].task.date;
-        descriptionInput.value = tasks[index].task.description;
+
 
         form.classList.remove("hidden")
          taskToEdit = index;
@@ -188,8 +167,6 @@ function updateList() {
 
     let date = dateInput.value.trim();
 
-    let description = descriptionInput.value.trim()
-        description = description.charAt(0).toUpperCase() + description.slice(1);
 
     let taskItem = document.createElement('li')
      tasks.forEach((task, index) => {   
@@ -199,7 +176,6 @@ function updateList() {
                     <label class="label peer-checked:line-through text-[1.2rem]" for=""> 
                         <p><span class="font-medium">Title:</span> ${title}</p>
                         <p><span class="font-medium">Date:</span> ${date}</p>
-                        <p><span class="font-medium block">Description:</span> ${description}</p>
                     </label>
                 </div>
                 <div class="flex justify-between items-center gap-2"> 
@@ -256,7 +232,6 @@ const discardBtn = document.getElementById("discardBtn")
 
         titleInput.value = "";
         dateInput.value = "";
-        descriptionInput.value = "";
      })
 
 
