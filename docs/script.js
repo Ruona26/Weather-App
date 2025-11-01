@@ -5,12 +5,15 @@ const dateInput = document.getElementById("dateInput")
 const descriptionInput = document.getElementById("descriptionInput")
 const btn = document.getElementById("btn")
 const list = document.getElementById("taskLists")
+let formBackdrop = document.getElementById("formBackdrop")
 let taskToEdit = null; 
 
 const addTaskBtn = document.getElementById("add-task-btn")
 addTaskBtn.addEventListener('click', ()=> {
     form.classList.toggle('hidden')
     taskLists.classList.add('hidden');
+    formBackdrop.classList.remove("hidden")
+
 })
      
 function saveTasks(){
@@ -71,7 +74,8 @@ btn.addEventListener("click", (e)=> {
         dateInput.value = "";
         descriptionInput.value = "";
 
-    
+    formBackdrop.classList.add("hidden")
+
     updateProgress()
     saveTasks();
 })
@@ -246,6 +250,7 @@ const discardBtn = document.getElementById("discardBtn")
      discardBtn.addEventListener('click', ()=>{
         dialog.close();
         form.classList.toggle('hidden');
+        formBackdrop.classList.add("hidden")
 
        if(tasks.length >= 1) {taskLists.classList.remove('hidden');}
 
@@ -263,5 +268,6 @@ flatpickr("#dateInput", {
     altFormat: "d/m/Y",
     minDate: "today"
 });
+
 
 
