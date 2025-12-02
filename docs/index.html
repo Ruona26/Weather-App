@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List</title>
+    <title>Weather App</title>
 
     <!-- styles -->
     <link rel="stylesheet" href="output.css" />
@@ -22,76 +22,51 @@
     <script src="./script.js" defer></script>
 </head>
 
-<body class="m-0 p-0 text-[20px]">
-    <div id="container"
-        class="bg-[url('./images/Penwrite.jpg')] bg-cover bg-center min-h-screen flex flex-col items-center pt-10 pb-10 gap-5 w-full">
-        <!-- Screen Dark Overlay -->
-        <div class="fixed inset-0 bg-black/75 pointer-events-none z-0"></div>
+<body class="flex flex-col items-center sm:justify-start md:justify-center h-screen bg-black text-gray-100 w-full">
+    <div id="container" class="text-[1.5rem] w-[90%] mx-auto shadow-lg shadow-[#444]/30 rounded-xl"> 
+        <!-- Input Field -->
+        <form class="my-10 flex justify-center w-[90%] mx-auto">
+            <input type="text" name="city" id="input" placeholder="Search City..."  class="w-[85%] md:w-[50%] border-r-0 border-l-2 border-t-2 border-b-2 border-[#55555533] py-3 px-6 rounded-l-full focus:border-none active:border-none">
+            <button id="searchBtn" class="w-10 flex items-center justify-center border-l-0 border-r-2 border-t-2 border-b-2 border-[#55555533] px-3 rounded-r-full cursor-pointer"><i class="fa-solid fa-magnifying-glass text-[1.2rem] text-gray-600"></i></button>
+        </form>
 
-        <!-- Title and Stats Conatainer -->
-        <div id="stats-container"
-            class="max-w-3xl w-[90%] md:w-[50%] lg:w-[40%] xl:w-[30%] mx-auto flex flex-col sm:flex-row justify-between items-center bg-[rgba(10,10,50,0.3)] rounded-md px-8 py-6 gap-6 z-10 text-center sm:text-left">
-            <div id="stats" class="flex-1 w-full sm:w-[18rem]">
-                <h3 class="text-[2rem] text-white z-10">Todo List</h3>
+        <!-- City Name and Flag -->
+        <figure class="flex justify-center items-center text-[2rem] gap-2">
+            <figcaption id="cityName"></figcaption>
+            <img id="flag" src="" alt="">
+        </figure>
 
-                <div id="progress-bar" class="max-w-[70%] rounded-full bg-gray-300 h-1.5 mt-10 mx-auto sm:w-full sm:mx-0">
-                    <div id="progress"
-                        class="w-[0%] h-1.5 bg-gray-600 rounded-full transition-all duration-700 ease-in-out"></div>
-                </div>
+        <!-- Weather Condition and Temperature -->
+        <figure class="flex flex-col justify-center items-center bg-gradient-to-r from-[#555]/7 via-black to-[#555]/30 
+        w-[70%] md:w-[50%] mx-auto my-3 py-8 rounded-xl">
+            <img id="weatherCondition" src="" alt="" class="">
+            <figcaption class="text-5xl md:text-6xl">
+                <span id="temperature"></span>
+            </figcaption>
+            
+        <p class="text-center mt-4 mx-5 md:text-3xl flex flex-wrap" id="description"></p>
+        </figure>
+
+
+        <!-- Clouds, Humidity and Temperature -->
+        <div class="flex flex-wrap items-center justify-center mt-5 mb-10 gap-5 sm:max-w-[90%] mx-auto">
+            <div class="bg-gradient-to-b from-transparent to-[#2b2a2a]/30 h-[15rem] leading-15 py-10 px-9 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
+                <p>Clouds</p>
+                <p><i class="fa-solid fa-cloud text-[3rem]"></i></p>
+                <p id="clouds"></p>
             </div>
-
-            <div id="fraction" class="p-4 rounded-full text-2xl bg-gray-200 shrink-0">
-                <p class="text-gray-900 font-medium">0/0</p>
+            <div class="bg-gradient-to-b from-transparent to-[#1f4e79]/12 h-[15rem] leading-15 py-10 px-6 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
+                <p>Humidity</p>
+                <div><i class="fa-solid fa-droplet text-[3rem] text-[#1f4e79]"></i></div>
+                <p id="humidity"></p>
+            </div>
+            <div class="bg-gradient-to-br from-[#4d3c77]/5 via-transparent to-[#4d3c77]/15 h-[15rem] leading-15 py-10 px-7 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
+                <p>Pressure</p>
+                <p><i class="fa-solid fa-gauge text-[3rem] text-[#4d3c77]"></i></p>
+                <p id="pressure"></p>
             </div>
         </div>
 
-        <!-- The Add a Task Button -->
-        <button id="add-task-btn" class="block w-[10rem] sm:w-[11rem] my-5 mx-auto text-white text-2xl bg-[rgba(10,10,50,0.3)] p-3 cursor-pointer z-10 rounded-md hover:bg-gray-300 hover:text-[rgba(10,10,50,1)] hover:font-medium transition-all duration-300">
-            Add a Task
-        </button>
-
-        <!-- Form Section -->
-        <div id="formBackdrop" class="fixed inset-0 bg-black/70 z-20 hidden"></div>
-        <form id="form"
-            class="w-96 max-w-[90%] sm:w-96 mx-auto max-h-[90vh] overflow-y-auto flex flex-col items-start justify-center z-30 gap-2 bg-[rgba(200,200,255,0.09)] px-4 py-7 rounded-md hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <button type="button" id="closeTaskBtn"
-                class="bg-[rgba(38,38,44,1)] rounded-md text-red-400 w-8 py-1 ml-[90%] cursor-pointer hover:bg-red-400 hover:text-black transition-all duration-300">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <label for="titleInput" class="text-white ml-4">Task</label>
-            <input type="text" placeholder="Enter Your Task" id="titleInput" value=""
-                class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mx-auto mb-4 max-w-full sm:text-[16px]" />
-
-            <label for="dateInput" class="text-white ml-4">Due Date</label>
-            <input type="text" id="dateInput" value="" placeholder="Enter date"
-                class="bg-[rgba(255,255,255,0.8)] rounded-md px-3 py-2 w-80 mx-auto mb-4 max-w-full sm:text-[16px]" />
-
-            <button id="btn" type="submit"
-                class="bg-[rgba(38,38,44,1)] text-green-400 hover:bg-green-400 hover:text-[rgba(38,38,44,1)] text-1xl px-3 py-2 w-20 mx-auto cursor-pointer rounded-md transition-all duration-300">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-        </form>
-
-        <!-- Task List Section -->
-        <ul id="taskLists" class="max-w-[90%] w-120 mx-auto z-10 bg-[rgba(10,10,50,0.3)] rounded-md px-1 pb-3 hidden">
-           
-        </ul>
-
-        <!-- Dialog Box Section -->
-        <dialog id="dialog"
-            class="bg-[rgba(220,220,220,0.9)] px-7 py-8 z-40 rounded-md w-96 max-w-[70%] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop:bg-black/70">
-            <p class="text-[1.4rem] font-medium text-center">Discard unsaved changes?</p>
-            <div class="flex justify-between items-center mt-7">
-                <button id="cancelBtn"
-                    class="cursor-pointer bg-[rgba(38,38,44,0.9)] p-2 text-[1.2rem] text-gray-200 rounded-md hover:bg-[rgba(38,38,44,1)]">
-                    Cancel
-                </button>
-                <button id="discardBtn"
-                    class="cursor-pointer bg-[rgba(38,38,44,0.9)] p-2 text-[1.2rem] text-gray-200 rounded-md hover:bg-[rgba(38,38,44,1)]">
-                    Discard
-                </button>
-            </div>
-        </dialog>
     </div>
 </body>
 
