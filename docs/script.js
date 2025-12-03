@@ -17,17 +17,16 @@ searchBtn.addEventListener('click', (e)=>{
         input.value = "";
     }
    else{
-    alert("Please Enter a valid location")
+    alert("Please Enter a Valid City Name")
    }
 })
 
 
 const apiKey = "a2727287758750577b102c144e29e1fd"
-let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&appid=`+apiKey;
-
 
 function getWeatherData () {
-    fetch(url + "&q=" + input.value) 
+    let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${input.value}&appid=${apiKey}`;
+    fetch(url) 
     .then(response => response.json())
     .then(data => {
         console.log(data)
@@ -36,11 +35,16 @@ function getWeatherData () {
             flag.src = `https://flagsapi.com/${data.sys.country}/shiny/32.png`;
             weatherCondition.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
             temperature.textContent = `${data.main.temp}°`;
-            description.textContent = data.weather[0].description;
+            const desc = data.weather[0].description;
+            description.textContent = desc.charAt(0).toUpperCase() + desc.slice(1);
 
             clouds.textContent = `${data.clouds.all}%`
             pressure.textContent = `${data.main.pressure}hPa`
             humidity.textContent = `${data.main.humidity}%`
         }
+        else{
+            alert("Please Enter a Valid City Name")
+        }
     })
+   
 }

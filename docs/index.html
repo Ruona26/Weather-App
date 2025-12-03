@@ -22,12 +22,12 @@
     <script src="./script.js" defer></script>
 </head>
 
-<body class="flex flex-col items-center sm:justify-start md:justify-center h-[90vh] bg-black text-gray-100 w-full">
+<body class="flex flex-col items-center sm:justify-start md:justify-center h-[90vh] bg-black text-gray-200 w-full">
     <div id="container" class="text-[1.5rem] w-[90%] mx-auto shadow-lg shadow-[#444]/30 rounded-xl"> 
-        <h1 class="text-4xl md:text-6xl font-medium text-[#777] text-center mt-9 mb-5">Weather App</h1>
+        <h1 class="text-4xl md:text-6xl font-medium text-[#999] text-center mt-9 mb-5">Weather App</h1>
         <!-- Input Field -->
         <form class="my-10 flex justify-center w-[90%] mx-auto">
-            <input type="text" name="city" id="input" placeholder="Search City..." class="w-[85%] md:w-[50%] border-r-0 border-l-2 border-t-2 border-b-2 border-[#55555533] py-3 px-6 rounded-l-full 
+            <input type="text" name="city" id="input" placeholder="Enter City Name..." class="w-[85%] md:w-[50%] border-r-0 border-l-2 border-t-2 border-b-2 border-[#55555533] py-3 px-6 rounded-l-full 
             outline-none focus:ring-0 focus-border-transparent focus:shadow-none appearance-none focus:outline-none">
             <button id="searchBtn" class="w-20 flex items-center justify-center border-l-0 border-r-2 border-t-2 border-b-2 border-[#55555533] px-3 rounded-r-full cursor-pointer"><i class="fa-solid fa-magnifying-glass text-[1.2rem] text-gray-600"></i></button>
         </form>
@@ -54,15 +54,15 @@
         <div class="flex flex-wrap items-center justify-center mt-5 mb-10 gap-5 sm:max-w-[90%] mx-auto">
             <div class="bg-gradient-to-b from-transparent to-[#2b2a2a]/30 h-[15rem] leading-15 py-10 px-9 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
                 <p>Clouds</p>
-                <p><i class="fa-solid fa-cloud text-[3rem]"></i></p>
+                <p><i class="fa-solid fa-cloud text-[3rem] text-[#aaa]"></i></p>
                 <p id="clouds"></p>
             </div>
-            <div class="bg-gradient-to-b from-transparent to-[#1f4e79]/12 h-[15rem] leading-15 py-10 px-6 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
+            <div class="bg-gradient-to-b from-transparent to-[#1f4e79]/20 h-[15rem] leading-15 py-10 px-6 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
                 <p>Humidity</p>
                 <div><i class="fa-solid fa-droplet text-[3rem] text-[#1f4e79]"></i></div>
                 <p id="humidity"></p>
             </div>
-            <div class="bg-gradient-to-br from-[#4d3c77]/5 via-transparent to-[#4d3c77]/15 h-[15rem] leading-15 py-10 px-7 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
+            <div class="bg-gradient-to-b from-transparent to-[#4d3c77]/20 h-[15rem] leading-15 py-10 px-7 flex flex-col items-center justify-center rounded-lg sm:w-[40%] md:w-[30%] lg:w-[20%]">
                 <p>Pressure</p>
                 <p><i class="fa-solid fa-gauge text-[3rem] text-[#4d3c77]"></i></p>
                 <p id="pressure"></p>
